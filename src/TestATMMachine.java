@@ -2,37 +2,26 @@ public class TestATMMachine {
 
     public static void main(String[] args){
 
-        ATMMachine atmMachine = new ATMMachine();
-
-        atmMachine.insertCard();
-
-        atmMachine.ejectCard();
-
-        atmMachine.insertCard();
-
-        atmMachine.insertPin(1234);
-
-        atmMachine.requestCash(2000);
-
-        atmMachine.insertCard();
-
-        atmMachine.insertPin(1234);
-
         ATMMachine realATMMachine = new ATMMachine();
+        GetATMData atmProxy = new ATMProxy(realATMMachine);
 
-        GetATMData atmProxy = new ATMProxy();
+        System.out.println("Cash in ATM Machine from proxy $" + atmProxy.getCashInMachine());
+        realATMMachine.insertCard();
+        realATMMachine.insertPin(1234);
+        realATMMachine.requestCash(200);
 
-        System.out.println("\nCurrent ATM State " + atmProxy.getATMState());
 
-        System.out.println("\nCash in ATM Machine $" + atmProxy.getCashInMachine());
+        System.out.println("Current ATM State " + atmProxy.getATMState());
 
-        // The user can't perform this action because ATMProxy doesn't
-        // have access to that potentially harmful method
+        System.out.println("Cash in ATM Machine from proxy $" + atmProxy.getCashInMachine());
+
+        // not possible
         // atmProxy.setCashInMachine(10000);
 
+        System.out.println("\nSetting cash in the real machine");
         realATMMachine.setCashInMachine(10000);
-        System.out.println("\nCash in ATM Machine $" + realATMMachine.getCashInMachine());
-
+        System.out.println("Cash in ATM Machine from real machine $" + realATMMachine.getCashInMachine());
+        System.out.println("Cash in ATM Machine from proxy $" + atmProxy.getCashInMachine());
     }
 
 }
