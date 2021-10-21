@@ -1,7 +1,5 @@
 public class ATMProxy implements GetATMData {
 
-    // Allows the user to access getATMState in the
-    // Object ATMMachine
     ATMMachine realATMMachine;
     public ATMProxy(ATMMachine realATMMachine){
         this.realATMMachine = realATMMachine;
@@ -10,12 +8,24 @@ public class ATMProxy implements GetATMData {
         return realATMMachine.getATMState();
     }
 
-    // Allows the user to access getCashInMachine
-    // in the Object ATMMachine
 
     public int getCashInMachine() {
         return realATMMachine.getCashInMachine();
 
     }
+    public void insertCard() {
+        getATMState().insertCard();
+    }
 
+    public void ejectCard() {
+        getATMState().ejectCard();
+    }
+
+    public void requestCash(int cashToWithdraw) {
+        getATMState().requestCash(cashToWithdraw);
+    }
+
+    public void insertPin(int pinEntered){
+        getATMState().insertPin(pinEntered);
+    }
 }
